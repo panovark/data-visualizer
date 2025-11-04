@@ -61,7 +61,8 @@ const DifficultyChart = ({ difficulties }) => {
               nameKey="name"
               innerRadius={60}
               outerRadius={120}
-              paddingAngle={2}
+              paddingAngle={chartData.length > 1 ? 2 : 0}
+              stroke="none"
             >
               <Label
                 content={({ viewBox }) => {

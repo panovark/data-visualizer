@@ -5,6 +5,7 @@ import CategoryChart from "./CategoryChart";
 import DifficultyChart from "./DifficultyChart";
 import CategoryFilter from "./CategoryFilter";
 import useTriviaFilters from "./hooks/useTriviaFilters.jsx";
+import ThemeToggle from "./ThemeToggle.jsx";
 
 const DataLoader = () => {
   const {
@@ -34,22 +35,31 @@ const DataLoader = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold mb-2">
-        Trivia Data Visualization Tool
-      </h1>
-      <p className="text-muted-foreground mb-8">
-        Loaded {totalQuestions} questions
-      </p>
+    <div className="container mx-auto px-6 py-8 lg:px-8">
+      <div className="mb-12 flex flex-col gap-8">
+        <div className="flex flex-col items-center gap-6 text-center lg:flex-row lg:items-start lg:justify-between lg:text-left">
+          <div>
+            <h1 className="text-6xl font-bold">
+              Trivia Data Visualization Tool
+            </h1>
+            <p className="text-2xl mt-2 text-muted-foreground">
+              Loaded {totalQuestions} questions
+            </p>
+          </div>
+          <ThemeToggle className="w-full max-w-xs sm:w-64 lg:w-60 lg:self-start" />
+        </div>
+        <div className="flex justify-center">
+          <CategoryFilter
+            categories={categories}
+            selected={selectedCategory}
+            onChange={setSelectedCategory}
+            helperText={filterStatus}
+            className="w-full max-w-lg sm:max-w-md"
+          />
+        </div>
+      </div>
 
       <div className="space-y-6">
-        <CategoryFilter
-          categories={categories}
-          selected={selectedCategory}
-          onChange={setSelectedCategory}
-          helperText={filterStatus}
-        />
-
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <CategoryChart categories={filteredCategories} />
           <DifficultyChart difficulties={filteredDifficulties} />
