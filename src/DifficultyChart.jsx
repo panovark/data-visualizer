@@ -6,6 +6,7 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const DifficultyChart = ({ difficulties }) => {
   const chartConfig = {
@@ -41,61 +42,65 @@ const DifficultyChart = ({ difficulties }) => {
   );
 
   return (
-    <div className="w-full">
-      <h2 className="text-2xl font-bold mb-4">Questions by Difficulty</h2>
-      <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
-        <PieChart>
-          <ChartTooltip
-            content={<ChartTooltipContent nameKey="difficultyKey" />}
-          />
-          <ChartLegend
-            content={<ChartLegendContent nameKey="difficultyKey" />}
-          />
-          <Pie
-            data={chartData}
-            dataKey="count"
-            nameKey="name"
-            innerRadius={60}
-            outerRadius={120}
-            paddingAngle={2}
-          >
-            <Label
-              content={({ viewBox }) => {
-                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                  const { cx, cy } = viewBox;
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle className="text-2xl">Questions by Difficulty</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
+          <PieChart>
+            <ChartTooltip
+              content={<ChartTooltipContent nameKey="difficultyKey" />}
+            />
+            <ChartLegend
+              content={<ChartLegendContent nameKey="difficultyKey" />}
+            />
+            <Pie
+              data={chartData}
+              dataKey="count"
+              nameKey="name"
+              innerRadius={60}
+              outerRadius={120}
+              paddingAngle={2}
+            >
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    const { cx, cy } = viewBox;
 
-                  return (
-                    <text
-                      x={cx}
-                      y={cy}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                    >
-                      <tspan
+                    return (
+                      <text
                         x={cx}
                         y={cy}
-                        className="fill-foreground text-3xl font-bold"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
                       >
-                        {totalQuestions}
-                      </tspan>
-                      <tspan
-                        x={cx}
-                        y={(cy || 0) + 24}
-                        className="fill-muted-foreground"
-                      >
-                        Total
-                      </tspan>
-                    </text>
-                  );
-                }
+                        <tspan
+                          x={cx}
+                          y={cy}
+                          className="fill-foreground text-3xl font-bold"
+                        >
+                          {totalQuestions}
+                        </tspan>
+                        <tspan
+                          x={cx}
+                          y={(cy || 0) + 24}
+                          className="fill-muted-foreground"
+                        >
+                          Total
+                        </tspan>
+                      </text>
+                    );
+                  }
 
-                return null;
-              }}
-            />
-          </Pie>
-        </PieChart>
-      </ChartContainer>
-    </div>
+                  return null;
+                }}
+              />
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 };
 
