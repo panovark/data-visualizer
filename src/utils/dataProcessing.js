@@ -1,6 +1,12 @@
-export const getCountsByField = (questions, field) => {
+import decodeHtmlEntities from "./text";
+
+export const getCountsByField = (questions = [], field) => {
   const counts = questions.reduce((acc, question) => {
-    const value = question[field];
+    if (!question || typeof question[field] !== "string") {
+      return acc;
+    }
+
+    const value = decodeHtmlEntities(question[field]);
     acc[value] = (acc[value] || 0) + 1;
     return acc;
   }, {});

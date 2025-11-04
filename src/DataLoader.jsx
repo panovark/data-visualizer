@@ -3,7 +3,8 @@ import getQuestions from "./api/getQuestions";
 import CategoryList from "./CategoryList";
 import CategoryChart from "./CategoryChart";
 import DifficultyChart from "./DifficultyChart";
-import { getCategoryCounts, getDifficultyCounts } from "./utils/dataProcessing";
+import CategoryFilter from "./CategoryFilter";
+import useTriviaFilters from "./hooks/useTriviaFilters.jsx";
 
 const DataLoader = () => {
   const {
@@ -16,11 +17,21 @@ const DataLoader = () => {
     staleTime: 5 * 60 * 1000,
   });
 
+  const filters = useTriviaFilters(questions);
+
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    categories,
+    filteredQuestions,
+    filteredCategories,
+    filteredDifficulties,
+    filterStatus,
+    totalQuestions,
+  } = filters;
+
   if (isLoading) return <div>Loading questions...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
-  const categories = getCategoryCounts(questions);
-  const difficulties = getDifficultyCounts(questions);
 
   return (
     <div className="container mx-auto p-8">
@@ -28,15 +39,24 @@ const DataLoader = () => {
         Trivia Data Visualization Tool
       </h1>
       <p className="text-muted-foreground mb-8">
-        Loaded {questions.length} questions
+        Loaded {totalQuestions} questions
       </p>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <CategoryChart categories={categories} />
-        <DifficultyChart difficulties={difficulties} />
-      </div>
+      <div className="space-y-6">
+        <CategoryFilter
+          categories={categories}
+          selected={selectedCategory}
+          onChange={setSelectedCategory}
+          helperText={filterStatus}
+        />
 
-      <CategoryList questions={questions} />
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <CategoryChart categories={filteredCategories} />
+          <DifficultyChart difficulties={filteredDifficulties} />
+        </div>
+
+        <CategoryList questions={filteredQuestions} />
+      </div>
     </div>
   );
 };
