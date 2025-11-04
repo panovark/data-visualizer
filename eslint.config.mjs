@@ -6,6 +6,9 @@ import pluginQuery from "@tanstack/eslint-plugin-query";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
+  {
+    ignores: ["dist/**", "node_modules/**"],
+  },
   js.configs.recommended,
   {
     ...reactPlugin.configs.flat.recommended,
@@ -30,6 +33,7 @@ export default [
     rules: {
       "react/no-unescaped-entities": "off",
       "react/prop-types": "off",
+      "no-unused-vars": ["error", { varsIgnorePattern: "^React$" }],
     },
   },
   prettier,
