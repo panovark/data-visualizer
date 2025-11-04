@@ -1,0 +1,102 @@
+import { Label, Pie, PieChart } from "recharts";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+} from "@/components/ui/chart";
+
+const DifficultyChart = ({ difficulties }) => {
+  const chartConfig = {
+    easy: {
+      label: "Easy",
+      color: "var(--chart-1)",
+    },
+    medium: {
+      label: "Medium",
+      color: "var(--chart-2)",
+    },
+    hard: {
+      label: "Hard",
+      color: "var(--chart-3)",
+    },
+  };
+
+  const chartData = difficulties.map(({ name, count }) => {
+    const key = name.toLowerCase();
+    const displayName = key.charAt(0).toUpperCase() + key.slice(1);
+
+    return {
+      name: displayName,
+      count,
+      fill: `var(--color-${key})`,
+      difficultyKey: key,
+    };
+  });
+
+  const totalQuestions = difficulties.reduce(
+    (sum, item) => sum + item.count,
+    0,
+  );
+
+  return (
+    <div className="w-full">
+      <h2 className="text-2xl font-bold mb-4">Questions by Difficulty</h2>
+      <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
+        <PieChart>
+          <ChartTooltip
+            content={<ChartTooltipContent nameKey="difficultyKey" />}
+          />
+          <ChartLegend
+            content={<ChartLegendContent nameKey="difficultyKey" />}
+          />
+          <Pie
+            data={chartData}
+            dataKey="count"
+            nameKey="name"
+            innerRadius={60}
+            outerRadius={120}
+            paddingAngle={2}
+          >
+            <Label
+              content={({ viewBox }) => {
+                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  const { cx, cy } = viewBox;
+
+                  return (
+                    <text
+                      x={cx}
+                      y={cy}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                    >
+                      <tspan
+                        x={cx}
+                        y={cy}
+                        className="fill-foreground text-3xl font-bold"
+                      >
+                        {totalQuestions}
+                      </tspan>
+                      <tspan
+                        x={cx}
+                        y={(cy || 0) + 24}
+                        className="fill-muted-foreground"
+                      >
+                        Total
+                      </tspan>
+                    </text>
+                  );
+                }
+
+                return null;
+              }}
+            />
+          </Pie>
+        </PieChart>
+      </ChartContainer>
+    </div>
+  );
+};
+
+export default DifficultyChart;

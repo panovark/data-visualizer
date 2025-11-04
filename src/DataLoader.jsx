@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import getQuestions from "./api/getQuestions";
 import CategoryList from "./CategoryList";
 import CategoryChart from "./CategoryChart";
-import { getCategoryCounts } from "./utils/dataProcessing";
+import DifficultyChart from "./DifficultyChart";
+import { getCategoryCounts, getDifficultyCounts } from "./utils/dataProcessing";
 
 const DataLoader = () => {
   const {
@@ -19,6 +20,7 @@ const DataLoader = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   const categories = getCategoryCounts(questions);
+  const difficulties = getDifficultyCounts(questions);
 
   return (
     <div className="container mx-auto p-8">
@@ -29,7 +31,10 @@ const DataLoader = () => {
         Loaded {questions.length} questions
       </p>
 
-      <CategoryChart categories={categories} />
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <CategoryChart categories={categories} />
+        <DifficultyChart difficulties={difficulties} />
+      </div>
 
       <CategoryList questions={questions} />
     </div>
