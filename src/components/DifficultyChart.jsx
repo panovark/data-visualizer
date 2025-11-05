@@ -64,8 +64,8 @@ const DifficultyChart = ({ difficulties }) => {
               data={chartData}
               dataKey="count"
               nameKey="name"
-              innerRadius={50}
-              outerRadius={100}
+              innerRadius="30%"
+              outerRadius="70%"
               paddingAngle={chartData.length > 1 ? 2 : 0}
               stroke="none"
             >

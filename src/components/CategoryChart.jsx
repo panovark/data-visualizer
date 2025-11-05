@@ -33,11 +33,11 @@ const CategoryChart = ({ categories }) => {
             <XAxis
               dataKey="name"
               tickLine={false}
-              tickMargin={10}
+              tickMargin={5}
               axisLine={false}
               angle={-45}
               textAnchor="end"
-              height={100}
+              height={110}
               tickFormatter={(value) => {
                 return value.length > 20 ? value.slice(0, 18) + "..." : value;
               }}
