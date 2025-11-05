@@ -7,6 +7,7 @@ import CategoryFilter from "@/components/CategoryFilter";
 import useTriviaFilters from "@/hooks/useTriviaFilters";
 import ThemeToggle from "@/components/ThemeToggle";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import LoadingState from "@/components/LoadingState";
 
 const DataLoader = () => {
   const {
@@ -32,7 +33,7 @@ const DataLoader = () => {
     totalQuestions,
   } = filters;
 
-  if (isLoading) return <div>Loading questions...</div>;
+  if (isLoading) return <LoadingState />;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
