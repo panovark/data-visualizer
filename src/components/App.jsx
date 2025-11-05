@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import DataLoader from "@/components/DataLoader";
 import ThemeProvider from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import "@/index.css";
 
 const queryClient = new QueryClient();
 

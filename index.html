@@ -4,7 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trivia Data Visualization</title>
+    <link rel="stylesheet" href="/src/index.css" />
+    <script>
+      (function () {
+        const STORAGE_KEY = "trivia-theme";
+        const defaultTheme = "system";
+        let theme;
+
+        try {
+          theme = localStorage.getItem(STORAGE_KEY) || defaultTheme;
+        } catch (e) {
+          theme = defaultTheme;
+        }
+
+        let resolvedTheme = theme;
+        if (theme === "system") {
+          resolvedTheme = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
+        }
+
+        const root = document.documentElement;
+        root.classList.toggle("dark", resolvedTheme === "dark");
+        root.dataset.theme = theme;
+      })();
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="src/components/App.jsx"></script>
