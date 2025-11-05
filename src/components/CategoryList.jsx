@@ -26,7 +26,9 @@ const CategoryList = ({ questions }) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-2xl">Category Breakdown</CardTitle>
+        <CardTitle className="text-xl sm:text-2xl">
+          Category Breakdown
+        </CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>

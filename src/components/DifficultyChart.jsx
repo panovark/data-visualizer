@@ -44,10 +44,15 @@ const DifficultyChart = ({ difficulties }) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-2xl">Questions by Difficulty</CardTitle>
+        <CardTitle className="text-xl sm:text-2xl">
+          Questions by Difficulty
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
+        <ChartContainer
+          config={chartConfig}
+          className="min-h-[350px] w-full sm:min-h-[400px]"
+        >
           <PieChart>
             <ChartTooltip
               content={<ChartTooltipContent nameKey="difficultyKey" />}
@@ -59,8 +64,8 @@ const DifficultyChart = ({ difficulties }) => {
               data={chartData}
               dataKey="count"
               nameKey="name"
-              innerRadius={60}
-              outerRadius={120}
+              innerRadius={50}
+              outerRadius={100}
               paddingAngle={chartData.length > 1 ? 2 : 0}
               stroke="none"
             >

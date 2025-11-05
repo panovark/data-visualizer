@@ -19,10 +19,15 @@ const CategoryChart = ({ categories }) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-2xl">Questions by Category</CardTitle>
+        <CardTitle className="text-xl sm:text-2xl">
+          Questions by Category
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
+        <ChartContainer
+          config={chartConfig}
+          className="min-h-[350px] w-full sm:min-h-[400px]"
+        >
           <BarChart data={categories} accessibilityLayer>
             <CartesianGrid vertical={false} />
             <XAxis

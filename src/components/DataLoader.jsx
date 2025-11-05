@@ -38,17 +38,17 @@ const DataLoader = () => {
   return (
     <div className="container mx-auto px-6 py-8 lg:px-8">
       <div className="mb-12 flex flex-col gap-8">
-        <div className="flex flex-col items-center gap-6 text-center lg:flex-row lg:items-start lg:justify-between lg:text-left">
+        <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:justify-between md:text-left">
           <div>
-            <h1 className="text-6xl font-bold">
+            <h1 className="text-4xl font-bold sm:text-6xl">
               Trivia Data Visualization Tool
             </h1>
-            <p className="text-2xl mt-2 text-muted-foreground">
+            <p className="text-lg mt-2 text-muted-foreground sm:text-2xl">
               Loaded {totalQuestions} questions
             </p>
           </div>
           <ErrorBoundary>
-            <ThemeToggle className="w-full max-w-xs sm:w-64 lg:w-60 lg:self-start" />
+            <ThemeToggle className="w-full max-w-lg sm:max-w-md md:self-start" />
           </ErrorBoundary>
         </div>
         <div className="flex justify-center">

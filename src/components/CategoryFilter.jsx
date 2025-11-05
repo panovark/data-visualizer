@@ -23,7 +23,7 @@ const CategoryFilter = ({
         <Select value={selected} onValueChange={onChange}>
           <SelectTrigger
             size="lg"
-            className="w-80 rounded-full border border-border/50 bg-background/90 px-5 font-medium transition-colors focus:border-primary/60 focus-visible:ring-2 focus-visible:ring-primary/25"
+            className="w-full rounded-full border border-border/50 bg-background/90 px-5 font-medium transition-colors focus:border-primary/60 focus-visible:ring-2 focus-visible:ring-primary/25"
           >
             <SelectValue placeholder="All categories" />
           </SelectTrigger>

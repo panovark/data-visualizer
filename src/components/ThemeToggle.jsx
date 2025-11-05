@@ -15,7 +15,7 @@ const ThemeToggle = ({ className }) => {
   const selectId = useId();
 
   return (
-    <div className={cn("flex justify-end", className)}>
+    <div className={cn("flex justify-center md:justify-end", className)}>
       <div className="flex items-center flex-col gap-1">
         <label
           className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground"
