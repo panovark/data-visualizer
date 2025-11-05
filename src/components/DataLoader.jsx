@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import getQuestions from "./api/getQuestions";
-import CategoryList from "./CategoryList";
-import CategoryChart from "./CategoryChart";
-import DifficultyChart from "./DifficultyChart";
-import CategoryFilter from "./CategoryFilter";
-import useTriviaFilters from "./hooks/useTriviaFilters.jsx";
-import ThemeToggle from "./ThemeToggle.jsx";
+import getQuestions from "@/api/getQuestions";
+import CategoryList from "@/components/CategoryList";
+import CategoryChart from "@/components/CategoryChart";
+import DifficultyChart from "@/components/DifficultyChart";
+import CategoryFilter from "@/components/CategoryFilter";
+import useTriviaFilters from "@/hooks/useTriviaFilters";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const DataLoader = () => {
   const {

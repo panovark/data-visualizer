@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
 
 const ThemeToggle = ({ className }) => {

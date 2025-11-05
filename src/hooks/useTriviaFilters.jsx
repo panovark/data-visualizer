@@ -1,9 +1,6 @@
 import { useMemo, useState } from "react";
-import {
-  getCategoryCounts,
-  getDifficultyCounts,
-} from "../utils/dataProcessing";
-import { decodeHtmlEntities } from "../utils/text";
+import { getCategoryCounts, getDifficultyCounts } from "@/utils/dataProcessing";
+import { decodeHtmlEntities } from "@/utils/text";
 
 const useTriviaFilters = (questions = []) => {
   const [selectedCategory, setSelectedCategory] = useState("all");

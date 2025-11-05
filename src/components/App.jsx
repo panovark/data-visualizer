@@ -1,9 +1,9 @@
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import DataLoader from "./DataLoader";
-import ThemeProvider from "./ThemeProvider.jsx";
-import "./index.css";
+import DataLoader from "@/components/DataLoader";
+import ThemeProvider from "@/components/ThemeProvider";
+import "@/index.css";
 
 const queryClient = new QueryClient();
 

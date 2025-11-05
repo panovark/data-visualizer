@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getCategoryCounts } from "./utils/dataProcessing";
+import { getCategoryCounts } from "@/utils/dataProcessing";
 
 const CategoryList = ({ questions }) => {
   const categories = useMemo(() => {
