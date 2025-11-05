@@ -6,6 +6,7 @@ import DifficultyChart from "@/components/DifficultyChart";
 import CategoryFilter from "@/components/CategoryFilter";
 import useTriviaFilters from "@/hooks/useTriviaFilters";
 import ThemeToggle from "@/components/ThemeToggle";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const DataLoader = () => {
   const {
@@ -46,26 +47,35 @@ const DataLoader = () => {
               Loaded {totalQuestions} questions
             </p>
           </div>
-          <ThemeToggle className="w-full max-w-xs sm:w-64 lg:w-60 lg:self-start" />
+          <ErrorBoundary>
+            <ThemeToggle className="w-full max-w-xs sm:w-64 lg:w-60 lg:self-start" />
+          </ErrorBoundary>
         </div>
         <div className="flex justify-center">
-          <CategoryFilter
-            categories={categories}
-            selected={selectedCategory}
-            onChange={setSelectedCategory}
-            helperText={filterStatus}
-            className="w-full max-w-lg sm:max-w-md"
-          />
+          <ErrorBoundary>
+            <CategoryFilter
+              categories={categories}
+              selected={selectedCategory}
+              onChange={setSelectedCategory}
+              helperText={filterStatus}
+              className="w-full max-w-lg sm:max-w-md"
+            />
+          </ErrorBoundary>
         </div>
       </div>
 
       <div className="space-y-6">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <CategoryChart categories={filteredCategories} />
-          <DifficultyChart difficulties={filteredDifficulties} />
+          <ErrorBoundary>
+            <CategoryChart categories={filteredCategories} />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <DifficultyChart difficulties={filteredDifficulties} />
+          </ErrorBoundary>
         </div>
-
-        <CategoryList questions={filteredQuestions} />
+        <ErrorBoundary>
+          <CategoryList questions={filteredQuestions} />
+        </ErrorBoundary>
       </div>
     </div>
   );
