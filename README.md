@@ -19,9 +19,9 @@ data-visualizer/
 ├── src/
 │   ├── api/               # Fetch helpers (Open Trivia DB)
 │   ├── components/        # Charts, filters, theming, shared UI
-│   ├── hooks/             # `useTriviaFilters` derived-state logic
-│   ├── lib/               # Utility helpers (e.g., className merger)
-│   ├── utils/             # Text decoding and aggregation helpers
+│   ├── hooks/             # useTriviaFilters.jsx derived-state logic
+│   ├── lib/               # shadcn utility helpers
+│   ├── trivia/            # Text decoding and aggregation helpers
 │   └── __tests__/         # Vitest suites for hooks and utilities
 ├── index.html
 ├── package.json
