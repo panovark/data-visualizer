@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { getCategoryCounts, getDifficultyCounts } from "@/utils/dataProcessing";
-import { decodeHtmlEntities } from "@/utils/text";
+import {
+  getCategoryCounts,
+  getDifficultyCounts,
+} from "@/trivia/dataProcessing";
+import { decodeHtmlEntities } from "@/trivia/text";
 
 describe("text utilities", () => {
   it("decodes common HTML entities and keeps unknown ones as-is", () => {
     expect(
-      decodeHtmlEntities('Tom &amp; Jerry&#039;s &lt;tag&gt; &unknown;'),
+      decodeHtmlEntities("Tom &amp; Jerry&#039;s &lt;tag&gt; &unknown;"),
     ).toBe("Tom & Jerry's <tag> &unknown;");
     expect(decodeHtmlEntities(null)).toBe("");
   });
