@@ -10,19 +10,21 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <ErrorBoundary>
-            <DataLoader />
-          </ErrorBoundary>
-        </ThemeProvider>
-        {import.meta.env.DEV && <ReactQueryDevtools />}
-      </QueryClientProvider>
-    </StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <ErrorBoundary>
+          <DataLoader />
+        </ErrorBoundary>
+      </ThemeProvider>
+      {import.meta.env.DEV && <ReactQueryDevtools />}
+    </QueryClientProvider>
   );
 };
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
