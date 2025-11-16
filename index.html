@@ -4,36 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trivia Data Visualization</title>
-    <link rel="stylesheet" href="/src/index.css" />
     <script>
       (function () {
         const STORAGE_KEY = "trivia-theme";
-        const defaultTheme = "system";
-        let theme;
+        const DEFAULT_THEME = "system";
 
-        try {
-          theme = localStorage.getItem(STORAGE_KEY) || defaultTheme;
-        } catch (e) {
-          theme = defaultTheme;
-        }
+        const getStoredTheme = () => {
+          try {
+            return localStorage.getItem(STORAGE_KEY) ?? DEFAULT_THEME;
+          } catch {
+            return DEFAULT_THEME;
+          }
+        };
 
-        let resolvedTheme = theme;
-        if (theme === "system") {
-          resolvedTheme = window.matchMedia("(prefers-color-scheme: dark)")
-            .matches
-            ? "dark"
-            : "light";
-        }
+        const prefersDark = () =>
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-        const root = document.documentElement;
-        root.classList.toggle("dark", resolvedTheme === "dark");
-        root.dataset.theme = theme;
+        const resolveTheme = (value) =>
+          value === "system" ? (prefersDark() ? "dark" : "light") : value;
+
+        const applyTheme = (value) => {
+          const resolved = resolveTheme(value);
+          const root = document.documentElement;
+          root.dataset.theme = value;
+          root.classList.toggle("dark", resolved === "dark");
+          root.style.colorScheme = resolved;
+        };
+
+        applyTheme(getStoredTheme());
       })();
     </script>
+    <link rel="stylesheet" href="/src/index.css" />
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="src/components/App.jsx"></script>
+    <script type="module" src="src/main.jsx"></script>
   </body>
 </html>
