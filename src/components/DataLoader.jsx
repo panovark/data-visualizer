@@ -16,7 +16,7 @@ const DataLoader = () => {
     error,
   } = useQuery({
     queryKey: ["questions"],
-    queryFn: getQuestions,
+    queryFn: ({ signal }) => getQuestions({ signal }),
     staleTime: 5 * 60 * 1000,
   });
 

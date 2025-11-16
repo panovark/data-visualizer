@@ -1,8 +1,8 @@
-export default async function getQuestions() {
+export default async function getQuestions({ signal } = {}) {
   const url = "https://opentdb.com/api.php?amount=50";
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { signal });
 
     if (!response.ok) {
       if (response.status === 429) {
