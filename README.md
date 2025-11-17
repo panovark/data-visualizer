@@ -21,8 +21,11 @@ data-visualizer/
 │   ├── components/        # Charts, filters, theming, shared UI
 │   ├── hooks/             # useTriviaFilters.jsx derived-state logic
 │   ├── lib/               # shadcn utility helpers
+│   ├── theme/             # Theme loading utility
 │   ├── trivia/            # Text decoding and aggregation helpers
-│   └── __tests__/         # Vitest suites for hooks and utilities
+│   ├── __tests__/         # Vitest suites for hooks and utilities
+│   ├── index.css          # Global CSS styles
+│   └── main.jsx           # Root component
 ├── index.html
 ├── package.json
 ├── vite.config.js
