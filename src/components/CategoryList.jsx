@@ -36,11 +36,14 @@ const CategoryList = ({ questions }) => {
           <ul className="space-y-3">
             {categories.map((category) => {
               const suffix = category.count === 1 ? "question" : "questions";
+              const itemLabel = `${category.name}: ${category.count} ${suffix}`;
 
               return (
                 <li
                   key={category.name}
-                  className="flex items-center justify-between rounded-lg border border-border bg-muted/40 p-3 transition hover:border-primary/50 hover:bg-muted/60"
+                  className="flex items-center justify-between rounded-lg border border-border bg-muted/40 p-3 transition hover:border-primary/50 hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  tabIndex={0}
+                  aria-label={itemLabel}
                 >
                   <div className="flex-1">
                     <p className="font-medium text-foreground">
@@ -58,7 +61,7 @@ const CategoryList = ({ questions }) => {
             })}
           </ul>
         ) : (
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground" tabIndex={0}>
             No questions match the current filter.
           </p>
         )}

@@ -53,7 +53,12 @@ const DifficultyChart = ({ difficulties }) => {
           config={chartConfig}
           className="min-h-[350px] w-full sm:min-h-[400px]"
         >
-          <PieChart>
+          <PieChart
+            accessibilityLayer
+            aria-label="Questions by Difficulty graph."
+            role="group"
+            tabIndex={0}
+          >
             <ChartTooltip
               content={<ChartTooltipContent nameKey="difficultyKey" />}
             />

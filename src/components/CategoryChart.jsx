@@ -8,14 +8,14 @@ import {
 } from "@/components/ui/chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const CategoryChart = ({ categories }) => {
-  const chartConfig = {
-    count: {
-      label: "Questions",
-      color: "var(--chart-1)",
-    },
-  };
+const chartConfig = {
+  count: {
+    label: "Questions",
+    color: "var(--chart-1)",
+  },
+};
 
+const CategoryChart = ({ categories }) => {
   return (
     <Card className="w-full">
       <CardHeader>
@@ -28,7 +28,13 @@ const CategoryChart = ({ categories }) => {
           config={chartConfig}
           className="min-h-[350px] w-full sm:min-h-[400px]"
         >
-          <BarChart data={categories} accessibilityLayer>
+          <BarChart
+            data={categories}
+            accessibilityLayer
+            aria-label="Questions by Category graph."
+            role="group"
+            tabIndex={0}
+          >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="name"
