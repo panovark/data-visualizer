@@ -40,7 +40,7 @@ const CategoryFilter = ({
           <SelectTrigger
             id={selectId}
             aria-describedby={helperId}
-            size="lg"
+            size="default"
             className="w-full rounded-full border border-border/50 bg-background/90 px-5 font-medium transition-colors focus:border-primary/60 focus-visible:ring-2 focus-visible:ring-primary/25"
           >
             <SelectValue placeholder="All categories" />

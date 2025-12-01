@@ -1,16 +1,17 @@
 # Trivia Data Visualization Tool
 
-A Vite + React 19 dashboard that fetches 50 trivia questions from the Open Trivia DB API, cleans the data, and visualizes categories and difficulty levels with interactive filters, charts, and a persistent theme toggle.
+A TypeScript + Vite + React 19 dashboard that fetches 50 trivia questions from the Open Trivia DB API, cleans the data, and visualizes categories and difficulty levels with interactive filters, charts, and a persistent theme toggle.
 
 ## 📚 About This Project
 
-This project demonstrates modern frontend practices while staying framework-light:
+This project demonstrates modern, type-safe frontend practices while staying framework-light:
 
 - React Query handles data fetching, caching, and retry logic for the trivia API.
 - Derived statistics (category, difficulty, totals) live in a dedicated `useTriviaFilters` hook for easy reuse.
 - Recharts powers the bar and pie charts, wrapped in a custom `ChartContainer` that injects theme-aware styles.
 - Tailwind CSS v4 (via the official Vite plugin), Radix UI primitives, and lucide-react icons provide a polished, responsive UI.
 - A resilient UX is ensured through error boundaries, skeleton loading states, and a ThemeProvider that syncs system preference with local storage.
+- TypeScript everywhere (strict, `tsc --noEmit`) to keep contracts with the API and UI components explicit.
 
 ## 🏗️ Project Structure
 
@@ -19,16 +20,16 @@ data-visualizer/
 ├── src/
 │   ├── api/               # Fetch helpers (Open Trivia DB)
 │   ├── components/        # Charts, filters, theming, shared UI
-│   ├── hooks/             # useTriviaFilters.jsx derived-state logic
-│   ├── lib/               # shadcn utility helpers
-│   ├── theme/             # Theme loading utility
+│   ├── hooks/             # useTriviaFilters.tsx derived-state logic
+│   ├── lib/               # shadcn utility helpers (cn)
+│   ├── theme/             # Theme loading utility (persistent theme)
 │   ├── trivia/            # Text decoding and aggregation helpers
 │   ├── __tests__/         # Vitest suites for hooks and utilities
 │   ├── index.css          # Global CSS styles
-│   └── main.jsx           # Root component
+│   └── main.tsx           # Root component
 ├── index.html
 ├── package.json
-├── vite.config.js
+├── vite.config.ts
 └── ...
 ```
 
@@ -83,8 +84,9 @@ npm run coverage # Generate coverage report
 ## 🧹 Code Quality
 
 ```bash
-npm run lint    # ESLint with React + TanStack Query presets
-npm run format  # Prettier over src/**/*.{js,jsx,css,html}
+npm run lint       # ESLint with React + TanStack Query presets (type-aware)
+npm run typecheck  # tsc --noEmit (strict)
+npm run format     # Prettier over src/**/*.{js,jsx,ts,tsx,css,html}
 ```
 
 ## 📦 Building for Production
@@ -99,6 +101,7 @@ npm run preview # Preview the production build locally
 ### Frontend
 
 - **React 19** with Strict Mode and Suspense-ready patterns.
+- **TypeScript** with strict mode and path aliases (`@/*`).
 - **TanStack Query** for API state management and caching.
 - **Recharts** for creating charts to visualize the data.
 - **Tailwind CSS v4** (via `@tailwindcss/vite`) with `clsx` + `tailwind-merge` helpers.

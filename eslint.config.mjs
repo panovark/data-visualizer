@@ -13,7 +13,7 @@ const tsConfigs = tseslint.configs.recommendedTypeChecked.map((config) => ({
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ["dist/**", "node_modules/**"],
+    ignores: ["dist/**", "node_modules/**", "coverage/**"],
   },
   js.configs.recommended,
   ...tsConfigs,
