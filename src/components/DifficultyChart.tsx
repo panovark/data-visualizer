@@ -7,8 +7,13 @@ import {
   ChartLegendContent,
 } from "@/components/ui/chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { TriviaCount } from "@/types/trivia";
 
-const DifficultyChart = ({ difficulties }) => {
+interface DifficultyChartProps {
+  difficulties: TriviaCount[];
+}
+
+const DifficultyChart = ({ difficulties }: DifficultyChartProps) => {
   const chartConfig = {
     easy: {
       label: "Easy",

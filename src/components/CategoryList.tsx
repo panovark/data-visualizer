@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import type { TriviaCount, TriviaQuestion } from "@/types/trivia";
 import {
   Card,
   CardContent,
@@ -8,9 +9,13 @@ import {
 } from "@/components/ui/card";
 import { getCategoryCounts } from "@/trivia/dataProcessing";
 
-const CategoryList = ({ questions }) => {
-  const categories = useMemo(() => {
-    if (!questions || questions.length === 0) {
+interface CategoryListProps {
+  questions?: TriviaQuestion[];
+}
+
+const CategoryList = ({ questions = [] }: CategoryListProps) => {
+  const categories = useMemo<TriviaCount[]>(() => {
+    if (questions.length === 0) {
       return [];
     }
     return [...getCategoryCounts(questions)].sort((a, b) => b.count - a.count);

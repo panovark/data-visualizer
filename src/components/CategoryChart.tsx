@@ -7,6 +7,7 @@ import {
   ChartLegendContent,
 } from "@/components/ui/chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { TriviaCount } from "@/types/trivia";
 
 const chartConfig = {
   count: {
@@ -15,7 +16,11 @@ const chartConfig = {
   },
 };
 
-const CategoryChart = ({ categories }) => {
+interface CategoryChartProps {
+  categories: TriviaCount[];
+}
+
+const CategoryChart = ({ categories }: CategoryChartProps) => {
   return (
     <Card className="w-full">
       <CardHeader>
@@ -44,8 +49,9 @@ const CategoryChart = ({ categories }) => {
               angle={-45}
               textAnchor="end"
               height={110}
-              tickFormatter={(value) => {
-                return value.length > 20 ? value.slice(0, 18) + "..." : value;
+              tickFormatter={(value: string) => {
+                if (typeof value !== "string") return value;
+                return value.length > 20 ? `${value.slice(0, 18)}...` : value;
               }}
             />
             <YAxis tickLine={false} axisLine={false} tickMargin={8} />

@@ -5,6 +5,7 @@ import CategoryChart from "@/components/CategoryChart";
 import DifficultyChart from "@/components/DifficultyChart";
 import CategoryFilter from "@/components/CategoryFilter";
 import useTriviaFilters from "@/hooks/useTriviaFilters";
+import type { TriviaQuestion } from "@/types/trivia";
 import ThemeToggle from "@/components/ThemeToggle";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import LoadingState from "@/components/LoadingState";
@@ -14,7 +15,7 @@ const DataLoader = () => {
     data: questions,
     isLoading,
     error,
-  } = useQuery({
+  } = useQuery<TriviaQuestion[], Error>({
     queryKey: ["questions"],
     queryFn: ({ signal }) => getQuestions({ signal }),
     staleTime: 5 * 60 * 1000,

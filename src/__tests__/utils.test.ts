@@ -4,6 +4,7 @@ import {
   getDifficultyCounts,
 } from "@/trivia/dataProcessing";
 import { decodeHtmlEntities } from "@/trivia/text";
+import type { TriviaQuestion } from "@/types/trivia";
 
 describe("text utilities", () => {
   it("decodes common HTML entities and keeps unknown ones as-is", () => {
@@ -15,7 +16,7 @@ describe("text utilities", () => {
 });
 
 describe("data processing helpers", () => {
-  const sampleQuestions = [
+  const sampleQuestions: Array<Partial<TriviaQuestion> | Record<string, unknown>> = [
     {
       category: "Science &amp; Nature",
       difficulty: "easy",
@@ -36,14 +37,15 @@ describe("data processing helpers", () => {
       category: 42,
       difficulty: 0,
     },
-    {
+  {
       category: "History",
       difficulty: null,
     },
   ];
+  const typedQuestions = sampleQuestions as unknown as TriviaQuestion[];
 
   it("aggregates questions by category while decoding names", () => {
-    expect(getCategoryCounts(sampleQuestions)).toEqual([
+    expect(getCategoryCounts(typedQuestions)).toEqual([
       { name: "Science & Nature", count: 2 },
       { name: "Video Games", count: 1 },
       { name: "History", count: 2 },
@@ -51,7 +53,7 @@ describe("data processing helpers", () => {
   });
 
   it("aggregates questions by difficulty while ignoring invalid values", () => {
-    expect(getDifficultyCounts(sampleQuestions)).toEqual([
+    expect(getDifficultyCounts(typedQuestions)).toEqual([
       { name: "easy", count: 1 },
       { name: "medium", count: 2 },
       { name: "hard", count: 1 },

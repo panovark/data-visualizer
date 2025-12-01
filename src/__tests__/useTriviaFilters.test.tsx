@@ -1,27 +1,40 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import useTriviaFilters from "@/hooks/useTriviaFilters";
+import type { TriviaQuestion } from "@/types/trivia";
 
-const sampleQuestions = [
+const sampleQuestions: TriviaQuestion[] = [
   {
     category: "Science &amp; Nature",
     difficulty: "easy",
     question: "Q1",
+    type: "multiple",
+    correct_answer: "A",
+    incorrect_answers: ["B", "C", "D"],
   },
   {
     category: "Science &amp; Nature",
     difficulty: "medium",
     question: "Q2",
+    type: "multiple",
+    correct_answer: "A",
+    incorrect_answers: ["B", "C", "D"],
   },
   {
     category: "Video Games",
     difficulty: "hard",
     question: "Q3",
+    type: "multiple",
+    correct_answer: "A",
+    incorrect_answers: ["B", "C", "D"],
   },
   {
     category: "History",
     difficulty: "medium",
     question: "Q4",
+    type: "multiple",
+    correct_answer: "A",
+    incorrect_answers: ["B", "C", "D"],
   },
 ];
 

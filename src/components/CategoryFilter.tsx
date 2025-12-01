@@ -7,6 +7,15 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import type { TriviaCount } from "@/types/trivia";
+
+interface CategoryFilterProps {
+  categories: TriviaCount[];
+  selected: string;
+  onChange: (value: string) => void;
+  helperText?: string;
+  className?: string;
+}
 
 const CategoryFilter = ({
   categories,
@@ -14,7 +23,7 @@ const CategoryFilter = ({
   onChange,
   helperText,
   className,
-}) => {
+}: CategoryFilterProps) => {
   const selectId = useId();
   const helperId = helperText ? `${selectId}-helper` : undefined;
 

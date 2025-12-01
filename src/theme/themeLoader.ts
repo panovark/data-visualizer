@@ -1,21 +1,27 @@
 const STORAGE_KEY = "trivia-theme";
-const DEFAULT_THEME = "system";
+const DEFAULT_THEME: ThemeOption = "system";
+
+type ThemeOption = "light" | "dark" | "system";
 
 const isWindowDefined = () => typeof window !== "undefined";
 
-const getStoredTheme = (fallback = DEFAULT_THEME) => {
+const getStoredTheme = (fallback: ThemeOption = DEFAULT_THEME): ThemeOption => {
   if (!isWindowDefined()) {
     return fallback;
   }
 
   try {
-    return window.localStorage.getItem(STORAGE_KEY) ?? fallback;
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored === "light" || stored === "dark" || stored === "system") {
+      return stored;
+    }
+    return fallback;
   } catch {
     return fallback;
   }
 };
 
-const persistTheme = (value) => {
+const persistTheme = (value: ThemeOption) => {
   if (!isWindowDefined()) {
     return;
   }
@@ -27,7 +33,7 @@ const persistTheme = (value) => {
   }
 };
 
-const prefersDark = () => {
+const prefersDark = (): boolean => {
   if (!isWindowDefined()) {
     return false;
   }
@@ -35,14 +41,14 @@ const prefersDark = () => {
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 };
 
-const resolveTheme = (value) => {
+const resolveTheme = (value: ThemeOption): Exclude<ThemeOption, "system"> => {
   if (value === "system") {
     return prefersDark() ? "dark" : "light";
   }
   return value;
 };
 
-const applyDocumentTheme = (value) => {
+const applyDocumentTheme = (value: ThemeOption) => {
   if (typeof document === "undefined") {
     return;
   }
@@ -55,13 +61,13 @@ const applyDocumentTheme = (value) => {
   root.style.colorScheme = resolved;
 };
 
-const initializeTheme = (fallback = DEFAULT_THEME) => {
+const initializeTheme = (fallback: ThemeOption = DEFAULT_THEME): ThemeOption => {
   const storedTheme = getStoredTheme(fallback);
   applyDocumentTheme(storedTheme);
   return storedTheme;
 };
 
-const subscribeToSystemTheme = (callback) => {
+const subscribeToSystemTheme = (callback: (theme: ThemeOption) => void) => {
   if (!isWindowDefined()) {
     return () => {};
   }

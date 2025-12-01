@@ -1,4 +1,4 @@
-const ENTITY_MAP = {
+const ENTITY_MAP: Record<string, string> = {
   "&amp;": "&",
   "&lt;": "<",
   "&gt;": ">",
@@ -7,8 +7,8 @@ const ENTITY_MAP = {
   "&apos;": "'",
 };
 
-export const decodeHtmlEntities = (text = "") => {
-  if (typeof text !== "string" || text.length === 0) {
+export const decodeHtmlEntities = (text?: string | null): string => {
+  if (!text || typeof text !== "string") {
     return text ?? "";
   }
 

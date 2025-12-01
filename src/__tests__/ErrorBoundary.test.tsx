@@ -2,14 +2,14 @@ import { cleanup, render, screen, fireEvent } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
-const ProblemChild = ({ shouldThrow }) => {
+const ProblemChild = ({ shouldThrow }: { shouldThrow?: boolean }) => {
   if (shouldThrow) {
     throw new Error("Boom");
   }
   return <div>All good</div>;
 };
 
-const Fallback = ({ reset }) => (
+const Fallback = ({ reset }: { reset: () => void }) => (
   <div role="alert">
     <p>Something went wrong</p>
     <button type="button" onClick={reset}>
@@ -18,7 +18,9 @@ const Fallback = ({ reset }) => (
   </div>
 );
 
-const fallbackRenderer = ({ reset }) => <Fallback reset={reset} />;
+const fallbackRenderer = ({ reset }: { reset: () => void }) => (
+  <Fallback reset={reset} />
+);
 
 describe("ErrorBoundary", () => {
   beforeEach(() => {

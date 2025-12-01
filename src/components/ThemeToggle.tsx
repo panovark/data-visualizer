@@ -10,7 +10,11 @@ import {
 import { useTheme } from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
 
-const ThemeToggle = ({ className }) => {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+const ThemeToggle = ({ className }: ThemeToggleProps) => {
   const { theme, setTheme } = useTheme();
   const selectId = useId();
 

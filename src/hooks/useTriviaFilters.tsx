@@ -1,21 +1,43 @@
-import { useMemo, useState } from "react";
+import {
+  useMemo,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import {
   getCategoryCounts,
   getDifficultyCounts,
 } from "@/trivia/dataProcessing";
 import { decodeHtmlEntities } from "@/trivia/text";
+import type { TriviaCount, TriviaQuestion } from "@/types/trivia";
 
-const useTriviaFilters = (questions = []) => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+type SelectedCategory = string;
 
-  const categories = useMemo(() => {
+interface TriviaFiltersResult {
+  selectedCategory: SelectedCategory;
+  setSelectedCategory: Dispatch<SetStateAction<SelectedCategory>>;
+  categories: TriviaCount[];
+  filteredQuestions: TriviaQuestion[];
+  filteredCategories: TriviaCount[];
+  filteredDifficulties: TriviaCount[];
+  filterStatus: string;
+  totalQuestions: number;
+}
+
+const useTriviaFilters = (
+  questions: TriviaQuestion[] = [],
+): TriviaFiltersResult => {
+  const [selectedCategory, setSelectedCategory] =
+    useState<SelectedCategory>("all");
+
+  const categories = useMemo<TriviaCount[]>(() => {
     if (questions.length === 0) {
       return [];
     }
     return getCategoryCounts(questions);
   }, [questions]);
 
-  const filteredQuestions = useMemo(() => {
+  const filteredQuestions = useMemo<TriviaQuestion[]>(() => {
     if (selectedCategory === "all") {
       return questions;
     }
@@ -38,7 +60,7 @@ const useTriviaFilters = (questions = []) => {
     return getCategoryCounts(filteredQuestions);
   }, [categories, filteredQuestions, selectedCategory]);
 
-  const filteredDifficulties = useMemo(() => {
+  const filteredDifficulties = useMemo<TriviaCount[]>(() => {
     if (filteredQuestions.length === 0) {
       return [];
     }
